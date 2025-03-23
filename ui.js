@@ -1,5 +1,259 @@
 $(function () {
 
+  // Couleurs de jantes officielles de GTA V
+  const wheelColors = [
+      { id: 0, name: "Noir", color: "#0d0d0d" },
+      { id: 1, name: "Graphite", color: "#1c1d21" },
+      { id: 2, name: "Noir Acier", color: "#32383d" },
+      { id: 3, name: "Gris Foncé", color: "#454b4f" },
+      { id: 4, name: "Gris Argenté", color: "#999da0" },
+      { id: 5, name: "Gris Acier", color: "#c2c4c6" },
+      { id: 6, name: "Argenté", color: "#979a97" },
+      { id: 7, name: "Bleu Argenté", color: "#637380" },
+      { id: 8, name: "Gris Roulé", color: "#63625c" },
+      { id: 9, name: "Argenté Ombré", color: "#3c3f47" },
+      { id: 10, name: "Métal", color: "#444e54" },
+      { id: 11, name: "Gris Anthracite", color: "#1f2226" },
+      { id: 12, name: "Noir", color: "#13181f" },
+      { id: 13, name: "Gris", color: "#26282a" },
+      { id: 14, name: "Gris Clair", color: "#1e2429" },
+      { id: 15, name: "Noir Utilitaire", color: "#333333" },
+      { id: 16, name: "Noir Poly", color: "#454545" },
+      { id: 17, name: "Gris Foncé Utilitaire", color: "#616161" },
+      { id: 18, name: "Argenté Utilitaire", color: "#7a7a7a" },
+      { id: 19, name: "Métal Utilitaire", color: "#7f7f7f" },
+      { id: 20, name: "Argenté Ombré Utilitaire", color: "#969696" },
+      { id: 21, name: "Noir Usé", color: "#121212" },
+      { id: 22, name: "Graphite Usé", color: "#2a2a2a" },
+      { id: 23, name: "Gris Argenté Usé", color: "#676767" },
+      { id: 24, name: "Argenté Usé", color: "#7a7a7a" },
+      { id: 25, name: "Bleu Argenté Usé", color: "#aaaaaa" },
+      { id: 26, name: "Argenté Ombré Usé", color: "#5a5a5a" },
+      { id: 27, name: "Rouge", color: "#7b0a00" },
+      { id: 28, name: "Rouge Torino", color: "#d10000" },
+      { id: 29, name: "Rouge Formule", color: "#9c0f14" },
+      { id: 30, name: "Rouge Flamme", color: "#a51e23" },
+      { id: 31, name: "Rouge Gracieux", color: "#7b1a22" },
+      { id: 32, name: "Rouge Grenat", color: "#6f1818" },
+      { id: 33, name: "Rouge Désert", color: "#49111d" },
+      { id: 34, name: "Rouge Cabernet", color: "#36070a" },
+      { id: 35, name: "Rouge Bonbon", color: "#d44a17" },
+      { id: 36, name: "Orange Lever de Soleil", color: "#cf360c" },
+      { id: 37, name: "Or Classique", color: "#a77737" },
+      { id: 38, name: "Orange", color: "#e25c10" },
+      { id: 39, name: "Rouge Mat", color: "#cf1f21" },
+      { id: 40, name: "Rouge Foncé Mat", color: "#732525" },
+      { id: 41, name: "Orange Mat", color: "#f27d20" },
+      { id: 42, name: "Jaune Mat", color: "#ffc91f" },
+      { id: 43, name: "Rouge Utilitaire", color: "#9c1016" },
+      { id: 44, name: "Rouge Vif Utilitaire", color: "#de0209" },
+      { id: 45, name: "Rouge Grenat Utilitaire", color: "#610000" },
+      { id: 46, name: "Rouge Usé", color: "#8a2c2c" },
+      { id: 47, name: "Rouge Doré Usé", color: "#a06f62" },
+      { id: 48, name: "Rouge Foncé Usé", color: "#521b1b" },
+      { id: 49, name: "Vert Foncé", color: "#1d2129" },
+      { id: 50, name: "Vert Course", color: "#122e2b" },
+      { id: 51, name: "Vert Mer", color: "#1f3335" },
+      { id: 52, name: "Vert Olive", color: "#2f4641" },
+      { id: 53, name: "Vert", color: "#1a6330" },
+      { id: 54, name: "Vert Essence", color: "#2d6836" },
+      { id: 55, name: "Vert Citron Mat", color: "#4b6f44" },
+      { id: 56, name: "Vert Foncé Utilitaire", color: "#1a292d" },
+      { id: 57, name: "Vert Utilitaire", color: "#2b463b" },
+      { id: 58, name: "Vert Foncé Usé", color: "#304f45" },
+      { id: 59, name: "Vert Usé", color: "#5e7255" },
+      { id: 60, name: "Mer Usée", color: "#63766b" },
+      { id: 61, name: "Bleu Minuit", color: "#152b38" },
+      { id: 62, name: "Bleu Foncé", color: "#132039" },
+      { id: 63, name: "Bleu Saxony", color: "#304c7e" },
+      { id: 64, name: "Bleu", color: "#4a6db5" },
+      { id: 65, name: "Bleu Marin", color: "#1f4894" },
+      { id: 66, name: "Bleu Portuaire", color: "#213b80" },
+      { id: 67, name: "Bleu Diamant", color: "#5390d5" },
+      { id: 68, name: "Bleu Surf", color: "#4a75bf" },
+      { id: 69, name: "Bleu Nautique", color: "#5471c5" },
+      { id: 70, name: "Bleu Vif", color: "#5c9ad6" },
+      { id: 71, name: "Bleu Violet", color: "#214576" },
+      { id: 72, name: "Bleu Spinnaker", color: "#47578f" },
+      { id: 73, name: "Bleu Ultra", color: "#4c6584" },
+      { id: 74, name: "Bleu Vif", color: "#5871a0" },
+      { id: 75, name: "Bleu Foncé Utilitaire", color: "#11203f" },
+      { id: 76, name: "Bleu Minuit Utilitaire", color: "#202c3a" },
+      { id: 77, name: "Bleu Utilitaire", color: "#2c5885" },
+      { id: 78, name: "Bleu Écume de Mer", color: "#5d95cb" },
+      { id: 79, name: "Bleu Éclair", color: "#205a83" },
+      { id: 80, name: "Bleu Maui Poly", color: "#2e86bd" },
+      { id: 81, name: "Bleu Vif Utilitaire", color: "#3b8ec5" },
+      { id: 82, name: "Bleu Foncé Mat", color: "#1e3c4d" },
+      { id: 83, name: "Bleu Mat", color: "#2f5699" },
+      { id: 84, name: "Bleu Minuit Mat", color: "#132237" },
+      { id: 85, name: "Bleu Foncé Usé", color: "#6b799c" },
+      { id: 86, name: "Bleu Usé", color: "#4984d5" },
+      { id: 87, name: "Bleu Clair Usé", color: "#90b0d9" },
+      { id: 88, name: "Jaune Taxi", color: "#ffcf20" },
+      { id: 89, name: "Jaune Course", color: "#fbe212" },
+      { id: 90, name: "Bronze", color: "#916532" },
+      { id: 91, name: "Jaune Oiseau", color: "#e0e13d" },
+      { id: 92, name: "Lime", color: "#98d223" },
+      { id: 93, name: "Champagne", color: "#9b8c78" },
+      { id: 94, name: "Beige Pueblo", color: "#503218" },
+      { id: 95, name: "Ivoire Foncé", color: "#473f2b" },
+      { id: 96, name: "Brun Chocolat", color: "#221b19" },
+      { id: 97, name: "Brun Doré", color: "#653f23" },
+      { id: 98, name: "Brun Clair", color: "#775c3e" },
+      { id: 99, name: "Beige Paille", color: "#ac9975" },
+      { id: 100, name: "Brun Mousse", color: "#6c6b4b" },
+      { id: 101, name: "Brun Biston", color: "#5a6352" },
+      { id: 102, name: "Brun Hêtre", color: "#9a9b80" },
+      { id: 103, name: "Brun Hêtre Foncé", color: "#5e6157" },
+      { id: 104, name: "Orange Chocolat", color: "#f2ad2e" },
+      { id: 105, name: "Sable de Plage", color: "#bfae7b" },
+      { id: 106, name: "Sable Décoloré", color: "#dfd5b2" },
+      { id: 107, name: "Crème", color: "#f7edd5" },
+      { id: 108, name: "Brun Utilitaire", color: "#3a2a1a" },
+      { id: 109, name: "Brun Moyen Utilitaire", color: "#785f33" },
+      { id: 110, name: "Brun Clair Utilitaire", color: "#b5a079" },
+      { id: 111, name: "Blanc", color: "#fffff6" },
+      { id: 112, name: "Blanc Givre", color: "#eaeaea" },
+      { id: 113, name: "Beige Miel Usé", color: "#b0ab94" },
+      { id: 114, name: "Brun Usé", color: "#453831" },
+      { id: 115, name: "Brun Foncé Usé", color: "#2a282b" },
+      { id: 116, name: "Beige Paille Usé", color: "#726c57" },
+      { id: 117, name: "Acier Brossé", color: "#6a747c" },
+      { id: 118, name: "Acier Noir Brossé", color: "#354158" },
+      { id: 119, name: "Aluminium Brossé", color: "#9ba0a8" },
+      { id: 120, name: "Chrome", color: "#5870a1" },
+      { id: 121, name: "Blanc Cassé Usé", color: "#eae6de" },
+      { id: 122, name: "Blanc Cassé Utilitaire", color: "#dfddd0" },
+      { id: 123, name: "Orange Usé", color: "#f2ad2e" },
+      { id: 124, name: "Orange Clair Usé", color: "#f9a458" },
+      { id: 125, name: "Vert Securicor", color: "#83c566" },
+      { id: 126, name: "Jaune Taxi Usé", color: "#f7ed5a" },
+      { id: 127, name: "Bleu Police", color: "#4cc3da" },
+
+
+    // Couleurs métalliques (type 1)
+
+      { id: 0, name: "Noir Métallisé", color: "#0d0d0d" },
+      { id: 1, name: "Graphite Noir Métallisé", color: "#1c1d21" },
+      { id: 2, name: "Noir Acier Métallisé", color: "#32383d" },
+      { id: 3, name: "Argent Foncé Métallisé", color: "#454b4f" },
+      { id: 4, name: "Argent Métallisé", color: "#999da0" },
+      { id: 5, name: "Argent Bleu Métallisé", color: "#c2c4c6" },
+      { id: 6, name: "Gris Acier Métallisé", color: "#979a97" },
+      { id: 7, name: "Argent Ombré Métallisé", color: "#637380" },
+      { id: 8, name: "Argent Pierre Métallisé", color: "#63625c" },
+      { id: 9, name: "Argent Minuit Métallisé", color: "#3c3f47" },
+      { id: 10, name: "Métal Métallisé", color: "#444e54" },
+      { id: 11, name: "Gris Anthracite Métallisé", color: "#1f2226" },
+      { id: 27, name: "Rouge Métallisé", color: "#7b0a00" },
+      { id: 28, name: "Rouge Torino Métallisé", color: "#d10000" },
+      { id: 29, name: "Rouge Formule Métallisé", color: "#9c0f14" },
+      { id: 30, name: "Rouge Flamme Métallisé", color: "#a51e23" },
+      { id: 31, name: "Rouge Gracieux Métallisé", color: "#7b1a22" },
+      { id: 32, name: "Rouge Grenat Métallisé", color: "#6f1818" },
+      { id: 33, name: "Rouge Désert Métallisé", color: "#49111d" },
+      { id: 34, name: "Rouge Cabernet Métallisé", color: "#36070a" },
+      { id: 35, name: "Rouge Bonbon Métallisé", color: "#d44a17" },
+      { id: 36, name: "Orange Lever de Soleil Métallisé", color: "#cf360c" },
+      { id: 37, name: "Or Classique Métallisé", color: "#a77737" },
+      { id: 38, name: "Orange Métallisé", color: "#e25c10" },
+      { id: 49, name: "Vert Foncé Métallisé", color: "#1d2129" },
+      { id: 50, name: "Vert Course Métallisé", color: "#122e2b" },
+      { id: 51, name: "Vert Mer Métallisé", color: "#1f3335" },
+      { id: 52, name: "Vert Olive Métallisé", color: "#2f4641" },
+      { id: 53, name: "Vert Métallisé", color: "#1a6330" },
+      { id: 54, name: "Vert Essence Métallisé", color: "#2d6836" },
+      { id: 61, name: "Bleu Minuit Métallisé", color: "#152b38" },
+      { id: 62, name: "Bleu Foncé Métallisé", color: "#132039" },
+      { id: 63, name: "Bleu Saxony Métallisé", color: "#304c7e" },
+      { id: 64, name: "Bleu Métallisé", color: "#4a6db5" },
+      { id: 65, name: "Bleu Marin Métallisé", color: "#1f4894" },
+      { id: 66, name: "Bleu Portuaire Métallisé", color: "#213b80" },
+      { id: 67, name: "Bleu Diamant Métallisé", color: "#5390d5" },
+      { id: 68, name: "Bleu Surf Métallisé", color: "#4a75bf" },
+      { id: 69, name: "Bleu Nautique Métallisé", color: "#5471c5" },
+      { id: 70, name: "Bleu Vif Métallisé", color: "#5c9ad6" },
+      { id: 71, name: "Bleu Violet Métallisé", color: "#214576" },
+      { id: 72, name: "Bleu Spinnaker Métallisé", color: "#47578f" },
+      { id: 73, name: "Bleu Ultra Métallisé", color: "#4c6584" },
+      { id: 74, name: "Bleu Vif Métallisé", color: "#5871a0" },
+      { id: 88, name: "Jaune Taxi Métallisé", color: "#ffcf20" },
+      { id: 89, name: "Jaune Course Métallisé", color: "#fbe212" },
+      { id: 90, name: "Bronze Métallisé", color: "#916532" },
+      { id: 91, name: "Jaune Oiseau Métallisé", color: "#e0e13d" },
+      { id: 92, name: "Lime Métallisé", color: "#98d223" },
+      { id: 93, name: "Champagne Métallisé", color: "#9b8c78" },
+      { id: 94, name: "Beige Pueblo Métallisé", color: "#503218" },
+      { id: 95, name: "Ivoire Foncé Métallisé", color: "#473f2b" },
+      { id: 96, name: "Brun Chocolat Métallisé", color: "#221b19" },
+      { id: 97, name: "Brun Doré Métallisé", color: "#653f23" },
+      { id: 98, name: "Brun Clair Métallisé", color: "#775c3e" },
+      { id: 99, name: "Beige Paille Métallisé", color: "#ac9975" },
+      { id: 100, name: "Brun Mousse Métallisé", color: "#6c6b4b" },
+      { id: 101, name: "Brun Biston Métallisé", color: "#5a6352" },
+      { id: 102, name: "Brun Hêtre Métallisé", color: "#9a9b80" },
+      { id: 103, name: "Brun Hêtre Foncé Métallisé", color: "#5e6157" },
+      { id: 104, name: "Orange Chocolat Métallisé", color: "#f2ad2e" },
+      { id: 105, name: "Sable de Plage Métallisé", color: "#bfae7b" },
+      { id: 106, name: "Sable Décoloré Métallisé", color: "#dfd5b2" },
+      { id: 107, name: "Crème Métallisée", color: "#f7edd5" },
+      { id: 111, name: "Blanc Métallisé", color: "#fffff6" },
+      { id: 112, name: "Blanc Givre Métallisé", color: "#eaeaea" },
+      { id: 125, name: "Vert Securicor Métallisé", color: "#83c566" },
+      { id: 137, name: "Rose Vermillon Métallisé", color: "#df5891" },
+      { id: 141, name: "Bleu Noir Métallisé", color: "#0f0f64" },
+      { id: 142, name: "Violet Noir Métallisé", color: "#0f0f2c" },
+      { id: 143, name: "Rouge Noir Métallisé", color: "#200000" },
+      { id: 145, name: "Violet Métallisé", color: "#180025" },
+      { id: 146, name: "Bleu Foncé V Métallisé", color: "#000625" },
+      { id: 150, name: "Rouge Lave Métallisé", color: "#8e0000" },
+
+
+
+      { id: 12, name: "Noir Mat", color: "#13181f" },
+      { id: 13, name: "Gris Mat", color: "#26282a" },
+      { id: 14, name: "Gris Clair Mat", color: "#1e2429" },
+      { id: 39, name: "Rouge Mat", color: "#cf1f21" },
+      { id: 40, name: "Rouge Foncé Mat", color: "#732525" },
+      { id: 41, name: "Orange Mat", color: "#f27d20" },
+      { id: 42, name: "Jaune Mat", color: "#ffc91f" },
+      { id: 55, name: "Vert Citron Mat", color: "#4b6f44" },
+      { id: 82, name: "Bleu Foncé Mat", color: "#1e3c4d" },
+      { id: 83, name: "Bleu Mat", color: "#2f5699" },
+      { id: 84, name: "Bleu Minuit Mat", color: "#132237" },
+      { id: 128, name: "Vert Mat", color: "#4e6443" },
+      { id: 129, name: "Brun Mat", color: "#bcac8f" },
+      { id: 131, name: "Blanc Mat", color: "#fcfcfc" },
+      { id: 148, name: "Violet Mat", color: "#0f0f66" },
+      { id: 149, name: "Violet Foncé Mat", color: "#05063b" },
+      { id: 151, name: "Vert Forêt Mat", color: "#0b5839" },
+      { id: 152, name: "Olive Terne Mat", color: "#4d5725" },
+      { id: 153, name: "Brun Désert Mat", color: "#7d5c58" },
+      { id: 154, name: "Tan Désert Mat", color: "#c3b492" },
+      { id: 155, name: "Vert Feuillage Mat", color: "#597d3d" },
+  
+
+
+      { id: 117, name: "Acier Brossé", color: "#6a747c" },
+      { id: 118, name: "Acier Noir Brossé", color: "#354158" },
+      { id: 119, name: "Aluminium Brossé", color: "#9ba0a8" },
+      { id: 120, name: "Chrome", color: "#5870a1" },
+      { id: 156, name: "Défaut Couleur Alliage", color: "#81827f" },
+      { id: 157, name: "Epsilon Bleu", color: "#1153a4" },
+      { id: 158, name: "Or Pur", color: "#af9f6f" },
+      { id: 159, name: "Or Brossé", color: "#d4af37" },
+      { id: 160, name: "Or Secret", color: "#bababa" },
+  
+
+    // Couleurs chameleon (type 5) - Ces couleurs changent en fonction de l'angle de vue
+      { id: 135, name: "Rose Vif", color: "#f21f99" },
+      { id: 136, name: "Rose Saumon", color: "#fdd6cd" },
+      { id: 138, name: "Orange", color: "#f6ae20" },
+      { id: 139, name: "Vert", color: "#b0ee6e" },
+      { id: 140, name: "Bleu", color: "#08a0ed" },
+  
+  ];
 // Variables globales pour les configurations UI
 let uiColors = {
   primary: "#398d75",
@@ -3086,7 +3340,6 @@ function showNotification(message, type = "info") {
   }, 2000);
 }
 
-
 function applyModification(category, level, extraData) {
   console.log(`Applying modification: ${category}, Level: ${level}, Extra: ${JSON.stringify(extraData)}`);
 
@@ -3107,15 +3360,21 @@ function applyModification(category, level, extraData) {
     }
   }
   
-  // Cas spécial pour les couleurs de jantes et fumée
+  // Cas spécial pour les couleurs de jantes
   if (category === "wheelColor" && extraData && extraData.rgb) {
-    // Inclure les RGB exacts pour le client
+    // Stocker la couleur actuelle dans vehicleData pour cohérence de l'interface
+    vehicleData.wheelColor = level;
+    
+    // Inclure les RGB exacts pour une application précise
     requestData.rgb = extraData.rgb;
+    requestData.color = level; // S'assurer que l'ID correct est envoyé
   }
   
+  // Cas spécial pour les couleurs de fumée
   if (category === "smokeColor" && extraData && extraData.rgb) {
-    // Inclure les RGB exacts pour le client
+    // Inclure les RGB exacts pour une application précise
     requestData.rgb = extraData.rgb;
+    requestData.color = level; // S'assurer que l'ID correct est envoyé
   }
 
   // Envoyer la modification au jeu
@@ -3635,69 +3894,8 @@ function applyModification(category, level, extraData) {
   }
 
 
-  const wheelColors = [
-    { id: 0, name: "Stock", color: "#444444", rgb: [68, 68, 68] },
-    { id: 1, name: "Noir", color: "#0C0C0C", rgb: [12, 12, 12] },
-    { id: 2, name: "Graphite", color: "#1A1A1A", rgb: [26, 26, 26] },
-    { id: 3, name: "Noir Anthracite", color: "#212121", rgb: [33, 33, 33] },
-    { id: 4, name: "Noir Acier", color: "#141414", rgb: [20, 20, 20] },
-    { id: 5, name: "Acier foncé", color: "#2A2A2A", rgb: [42, 42, 42] },
-    { id: 6, name: "Argent", color: "#717171", rgb: [113, 113, 113] },
-    { id: 7, name: "Argent bleuté", color: "#525A6A", rgb: [82, 90, 106] },
-    { id: 8, name: "Laminé", color: "#6A6A6A", rgb: [106, 106, 106] },
-    { id: 9, name: "Argent ombré", color: "#575757", rgb: [87, 87, 87] },
-    { id: 10, name: "Pierre", color: "#3F3F3F", rgb: [63, 63, 63] },
-    { id: 11, name: "Minuit", color: "#404040", rgb: [64, 64, 64] },
-    { id: 12, name: "Gunmetal", color: "#333333", rgb: [51, 51, 51] },
-    { id: 13, name: "Aluminium", color: "#8C8C8C", rgb: [140, 140, 140] },
-    { id: 14, name: "Chrome pur", color: "#C0C0C0", rgb: [192, 192, 192] },
-    { id: 15, name: "Blanc frost", color: "#FFFFFF", rgb: [255, 255, 255] },
-    { id: 16, name: "Or", color: "#B29C55", rgb: [178, 156, 85] },
-    { id: 17, name: "Or rose", color: "#996633", rgb: [153, 102, 51] },
-    { id: 18, name: "Or brossé", color: "#9A7F46", rgb: [154, 127, 70] },
-    { id: 19, name: "Chrome doré", color: "#CFB656", rgb: [207, 182, 86] },
-    { id: 20, name: "Bronze", color: "#5B391E", rgb: [91, 57, 30] },
-    { id: 21, name: "Bronze clair", color: "#6D5836", rgb: [109, 88, 54] },
-    { id: 22, name: "Cuivre", color: "#A36243", rgb: [163, 98, 67] },
-    { id: 23, name: "Orange métallisé", color: "#BF4829", rgb: [191, 72, 41] },
-    { id: 24, name: "Rouge foncé", color: "#530000", rgb: [83, 0, 0] },
-    { id: 25, name: "Rouge vif", color: "#6B0000", rgb: [107, 0, 0] },
-    { id: 26, name: "Rouge Garnet", color: "#49030A", rgb: [73, 3, 10] },
-    { id: 27, name: "Rouge classique", color: "#650000", rgb: [101, 0, 0] },
-    { id: 28, name: "Rouge orangé", color: "#940700", rgb: [148, 7, 0] },
-    { id: 29, name: "Rouge clair", color: "#970000", rgb: [151, 0, 0] },
-    { id: 30, name: "Jaune", color: "#FFCF00", rgb: [255, 207, 0] },
-    { id: 31, name: "Jaune race", color: "#FFFF00", rgb: [255, 255, 0] },
-    { id: 32, name: "Vert citron", color: "#4C9200", rgb: [76, 146, 0] },
-    { id: 33, name: "Vert forêt", color: "#132428", rgb: [19, 36, 40] },
-    { id: 34, name: "Vert sapin", color: "#122E2B", rgb: [18, 46, 43] },
-    { id: 35, name: "Olive", color: "#1F2E2C", rgb: [31, 46, 44] },
-    { id: 36, name: "Vert kaki", color: "#2F4F4F", rgb: [47, 79, 79] },
-    { id: 37, name: "Vert vif", color: "#1F9764", rgb: [31, 151, 100] },
-    { id: 38, name: "Bleu marine", color: "#1A2847", rgb: [26, 40, 71] },
-    { id: 39, name: "Bleu ultra", color: "#0B1982", rgb: [11, 25, 130] },
-    { id: 40, name: "Bleu horizon", color: "#132039", rgb: [19, 32, 57] },
-    { id: 41, name: "Bleu profond", color: "#010E2F", rgb: [1, 14, 47] },
-    { id: 42, name: "Bleu surf", color: "#0F1021", rgb: [15, 16, 33] },
-    { id: 43, name: "Cyan pastel", color: "#0E2F41", rgb: [14, 47, 65] },
-    { id: 44, name: "Bleu aqua", color: "#255470", rgb: [37, 84, 112] },
-    { id: 45, name: "Teal", color: "#196587", rgb: [25, 101, 135] },
-    { id: 46, name: "Bleu acier", color: "#1A4460", rgb: [26, 68, 96] },
-    { id: 47, name: "Bleu nuit", color: "#28354C", rgb: [40, 53, 76] },
-    { id: 48, name: "Violet foncé", color: "#340040", rgb: [52, 0, 64] },
-    { id: 49, name: "Violet", color: "#410042", rgb: [65, 0, 66] },
-    { id: 50, name: "Rose", color: "#6A1F80", rgb: [106, 31, 128] },
-    { id: 51, name: "Magenta", color: "#541E69", rgb: [84, 30, 105] },
-    { id: 52, name: "Rose saumon", color: "#6E3071", rgb: [110, 48, 113] },
-    { id: 53, name: "Vermilion Rose", color: "#AF3393", rgb: [175, 51, 147] },
-    { id: 54, name: "Lavande", color: "#592E98", rgb: [89, 46, 152] },
-    { id: 55, name: "Violet Schafter", color: "#250CC9", rgb: [37, 12, 201] },
-    { id: 56, name: "Indigo", color: "#4700AB", rgb: [71, 0, 171] },
-    { id: 57, name: "Violet graphite", color: "#4A006A", rgb: [74, 0, 106] },
-    { id: 58, name: "Violet minuit", color: "#180056", rgb: [24, 0, 86] },
-    { id: 59, name: "Gris brillant", color: "#BCBCBC", rgb: [188, 188, 188] }
-  ];
-  
+
+
   const tyreSmokes = [
     { id: 1, name: "Blanc", color: "#FFFFFF", rgb: [255, 255, 255] },
     { id: 2, name: "Noir", color: "#000000", rgb: [0, 0, 0] },
@@ -3721,412 +3919,374 @@ function applyModification(category, level, extraData) {
     { id: 20, name: "Rouge vermillon", color: "#DF2800", rgb: [223, 40, 0] }
   ];
 
-function generateWheelsUI() {
-  $('#wheels-container').empty();
-  
-  // Ajouter un titre
-  $('#wheels-container').append(`<div class="section-title">Customisation roues</div>`);
-  
-  // Type de roues
-  const wheelTypeItem = `
-    <div class="mod-item" data-category="wheelType">
-      <div class="mod-item-title">Type de roues</div>
-      <div class="mod-item-level" id="wheelType-level">Sport</div>
-      <div class="selection">
-        <div class="ligne"></div>
-        <div class="rond" id="wheelType-slider"></div>
-        <div class="fleches" id="wheelType-right">
-          <div class="fleche"></div>
-          <div class="fleche-2"></div>
-        </div>
-        <div class="fleches-2" id="wheelType-left">
-          <div class="fleche"></div>
-          <div class="fleche-2"></div>
+
+  function generateWheelsUI() {
+    $('#wheels-container').empty();
+    
+    // Ajouter un titre
+    $('#wheels-container').append(`<div class="section-title">Customisation roues</div>`);
+    
+    // Type de roues
+    const wheelTypeItem = `
+      <div class="mod-item" data-category="wheelType">
+        <div class="mod-item-title">Type de roues</div>
+        <div class="mod-item-level" id="wheelType-level">Sport</div>
+        <div class="selection">
+          <div class="ligne"></div>
+          <div class="rond" id="wheelType-slider"></div>
+          <div class="fleches" id="wheelType-right">
+            <div class="fleche"></div>
+            <div class="fleche-2"></div>
+          </div>
+          <div class="fleches-2" id="wheelType-left">
+            <div class="fleche"></div>
+            <div class="fleche-2"></div>
+          </div>
         </div>
       </div>
-    </div>
-  `;
-  
-  $('#wheels-container').append(wheelTypeItem);
-  
-  // S'assurer que wheelCategories.wheelType.types est défini
-  if (wheelCategories.wheelType && wheelCategories.wheelType.types && wheelCategories.wheelType.types.length > 0) {
-    // Initialiser le slider pour le type de roue
-    let currentType = wheelCategories.wheelType.types.findIndex(type => type.active);
-    if (currentType !== -1) {
+    `;
+    
+    $('#wheels-container').append(wheelTypeItem);
+    
+    // S'assurer que wheelCategories.wheelType.types est défini
+    if (wheelCategories.wheelType && wheelCategories.wheelType.types && wheelCategories.wheelType.types.length > 0) {
+      // Initialiser le slider pour le type de roue
+      let currentType = wheelCategories.wheelType.types.findIndex(type => type.active);
+      if (currentType !== -1) {
+        const lineWidth = 260;
+        const position = (currentType / (wheelCategories.wheelType.types.length - 1)) * lineWidth;
+        $(`#wheelType-slider`).css('left', 45 + position);
+        $('#wheelType-level').text(wheelCategories.wheelType.types[currentType].name);
+      } else {
+        $(`#wheelType-slider`).css('left', '45px');
+        $('#wheelType-level').text("Sport");
+      }
+      
+      // Gestionnaires d'événements
+      $(`#wheelType-left`).click(() => changeWheelType(-1));
+      $(`#wheelType-right`).click(() => changeWheelType(1));
+    }
+    
+    // Modèle de roues avant
+    $('#wheels-container').append(`<div class="mod-item-title2">Modèle de roues</div>`);
+    
+    // Vérifier si les options de roues avant sont disponibles
+    if (wheelCategories.frontWheel) {
+      const wheelModelItem = `
+        <div class="mod-item" data-category="frontWheel">
+          <div class="mod-item-title">Roues avant</div>
+          <div class="mod-item-level" id="frontWheel-level">${wheelCategories.frontWheel.current > 0 ? "Niveau " + wheelCategories.frontWheel.current : "Aucun"}</div>
+          <div class="selection">
+            <div class="ligne"></div>
+            <div class="rond" id="frontWheel-slider"></div>
+            <div class="fleches" id="frontWheel-right">
+              <div class="fleche"></div>
+              <div class="fleche-2"></div>
+            </div>
+            <div class="fleches-2" id="frontWheel-left">
+              <div class="fleche"></div>
+              <div class="fleche-2"></div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      $('#wheels-container').append(wheelModelItem);
+      
+      // Initialiser le slider pour le modèle de roue avant
       const lineWidth = 260;
-      const position = (currentType / (wheelCategories.wheelType.types.length - 1)) * lineWidth;
-      $(`#wheelType-slider`).css('left', 45 + position);
-      $('#wheelType-level').text(wheelCategories.wheelType.types[currentType].name);
-    } else {
-      $(`#wheelType-slider`).css('left', '45px');
-      $('#wheelType-level').text("Sport");
+      const position = wheelCategories.frontWheel.maxLevel > 0 
+        ? (wheelCategories.frontWheel.current / wheelCategories.frontWheel.maxLevel) * lineWidth 
+        : 0;
+      $(`#frontWheel-slider`).css('left', 45 + position);
+      
+      // Gestionnaires d'événements
+      $(`#frontWheel-left`).click(() => changeModLevel('frontWheel', -1));
+      $(`#frontWheel-right`).click(() => changeModLevel('frontWheel', 1));
     }
     
-    // Gestionnaires d'événements
-    $(`#wheelType-left`).click(() => changeWheelType(-1));
-    $(`#wheelType-right`).click(() => changeWheelType(1));
-  }
-  
-  // Modèle de roues avant
-  $('#wheels-container').append(`<div class="mod-item-title2">Modèle de roues</div>`);
-  
-  // Vérifier si les options de roues avant sont disponibles
-  if (wheelCategories.frontWheel) {
-    const wheelModelItem = `
-      <div class="mod-item" data-category="frontWheel">
-        <div class="mod-item-title">Roues avant</div>
-        <div class="mod-item-level" id="frontWheel-level">${wheelCategories.frontWheel.current > 0 ? "Niveau " + wheelCategories.frontWheel.current : "Aucun"}</div>
-        <div class="selection">
-          <div class="ligne"></div>
-          <div class="rond" id="frontWheel-slider"></div>
-          <div class="fleches" id="frontWheel-right">
-            <div class="fleche"></div>
-            <div class="fleche-2"></div>
-          </div>
-          <div class="fleches-2" id="frontWheel-left">
-            <div class="fleche"></div>
-            <div class="fleche-2"></div>
+    // Modèle de roues arrière (seulement pour les motos)
+    if (wheelCategories.backWheel && wheelCategories.backWheel.maxLevel > 0) {
+      const rearWheelItem = `
+        <div class="mod-item" data-category="backWheel">
+          <div class="mod-item-title">Roues arrière</div>
+          <div class="mod-item-level" id="backWheel-level">${wheelCategories.backWheel.current > 0 ? "Niveau " + wheelCategories.backWheel.current : "Aucun"}</div>
+          <div class="selection">
+            <div class="ligne"></div>
+            <div class="rond" id="backWheel-slider"></div>
+            <div class="fleches" id="backWheel-right">
+              <div class="fleche"></div>
+              <div class="fleche-2"></div>
+            </div>
+            <div class="fleches-2" id="backWheel-left">
+              <div class="fleche"></div>
+              <div class="fleche-2"></div>
+            </div>
           </div>
         </div>
-      </div>
-    `;
-    
-    $('#wheels-container').append(wheelModelItem);
-    
-    // Initialiser le slider pour le modèle de roue avant
-    const lineWidth = 260;
-    const position = wheelCategories.frontWheel.maxLevel > 0 
-      ? (wheelCategories.frontWheel.current / wheelCategories.frontWheel.maxLevel) * lineWidth 
-      : 0;
-    $(`#frontWheel-slider`).css('left', 45 + position);
-    
-    // Gestionnaires d'événements
-    $(`#frontWheel-left`).click(() => changeModLevel('frontWheel', -1));
-    $(`#frontWheel-right`).click(() => changeModLevel('frontWheel', 1));
-  }
-  
-  // Modèle de roues arrière (seulement pour les motos)
-  if (wheelCategories.backWheel && wheelCategories.backWheel.maxLevel > 0) {
-    const rearWheelItem = `
-      <div class="mod-item" data-category="backWheel">
-        <div class="mod-item-title">Roues arrière</div>
-        <div class="mod-item-level" id="backWheel-level">${wheelCategories.backWheel.current > 0 ? "Niveau " + wheelCategories.backWheel.current : "Aucun"}</div>
-        <div class="selection">
-          <div class="ligne"></div>
-          <div class="rond" id="backWheel-slider"></div>
-          <div class="fleches" id="backWheel-right">
-            <div class="fleche"></div>
-            <div class="fleche-2"></div>
-          </div>
-          <div class="fleches-2" id="backWheel-left">
-            <div class="fleche"></div>
-            <div class="fleche-2"></div>
-          </div>
-        </div>
-      </div>
-    `;
-    
-    $('#wheels-container').append(rearWheelItem);
-    
-    // Initialiser le slider pour le modèle de roue arrière
-    const lineWidth = 260;
-    const position = (wheelCategories.backWheel.current / wheelCategories.backWheel.maxLevel) * lineWidth;
-    $(`#backWheel-slider`).css('left', 45 + position);
-    
-    // Gestionnaires d'événements
-    $(`#backWheel-left`).click(() => changeModLevel('backWheel', -1));
-    $(`#backWheel-right`).click(() => changeModLevel('backWheel', 1));
-  }
-  
-  // Couleur des jantes avec onglets
-  $('#wheels-container').append(`
-    <div class="color-section">
-      <div class="color-section-header">
-        <div class="color-title">Couleur des jantes</div>
-        <div class="color-expand-btn"><i class="fas fa-chevron-up"></i></div>
-      </div>
+      `;
       
-      <div class="color-content" id="wheel-color-content">
-        <div class="color-tabs">
-          <div class="color-tab active" data-tab="simple" data-target="wheel">Couleurs prédéfinies</div>
-          <div class="color-tab" data-tab="custom" data-target="wheel">Couleur personnalisée</div>
+      $('#wheels-container').append(rearWheelItem);
+      
+      // Initialiser le slider pour le modèle de roue arrière
+      const lineWidth = 260;
+      const position = (wheelCategories.backWheel.current / wheelCategories.backWheel.maxLevel) * lineWidth;
+      $(`#backWheel-slider`).css('left', 45 + position);
+      
+      // Gestionnaires d'événements
+      $(`#backWheel-left`).click(() => changeModLevel('backWheel', -1));
+      $(`#backWheel-right`).click(() => changeModLevel('backWheel', 1));
+    }
+    
+    // Couleur des jantes - Version simplifiée sans onglet personnalisé
+    $('#wheels-container').append(`
+      <div class="color-section">
+        <div class="color-section-header">
+          <div class="color-title">Couleur des jantes</div>
+          <div class="color-expand-btn"><i class="fas fa-chevron-up"></i></div>
         </div>
         
-        <div id="wheel-simple-content">
+        <div class="color-content" id="wheel-color-content">
           <div class="wheel-colors-grid">
-            ${wheelColors.map(color => `
-              <div class="color-item wheel-color ${vehicleData.wheelColor === color.id ? 'active' : ''}"
-                   data-color="${color.id}" 
-                   data-rgb="${color.rgb.join(',')}"
-                   style="background-color: ${color.color}" 
-                   title="${color.name}">
-              </div>
-            `).join('')}
+            <!-- Les couleurs seront générées ici -->
           </div>
-        </div>
-        
-        <div id="wheel-custom-content" style="display: none;">
-          <div class="color-preview" id="wheel-preview"></div>
-          
-          <div class="rgb-sliders">
-            <div class="rgb-slider">
-              <span>R</span>
-              <input type="range" min="0" max="255" value="128" id="wheel-r-slider">
-              <span id="wheel-r-value">128</span>
-            </div>
-            <div class="rgb-slider">
-              <span>G</span>
-              <input type="range" min="0" max="255" value="128" id="wheel-g-slider">
-              <span id="wheel-g-value">128</span>
-            </div>
-            <div class="rgb-slider">
-              <span>B</span>
-              <input type="range" min="0" max="255" value="128" id="wheel-b-slider">
-              <span id="wheel-b-value">128</span>
-            </div>
-          </div>
-          
-          <div class="color-picker-values">
-            <div class="color-input">
-              <span>HEX</span>
-              <input type="text" id="wheel-hex-value" value="#808080">
-            </div>
-            <div class="color-input">
-              <span>H</span>
-              <input type="number" min="0" max="360" id="wheel-h-value" value="0">
-            </div>
-            <div class="color-input">
-              <span>S</span>
-              <input type="number" min="0" max="100" id="wheel-s-value" value="0">
-            </div>
-            <div class="color-input">
-              <span>B</span>
-              <input type="number" min="0" max="100" id="wheel-b-value" value="50">
-            </div>
-          </div>
-          
-          <div class="gradient-slider">
-            <input type="range" min="0" max="360" value="0" id="wheel-hue-slider">
-          </div>
-          
-          <button class="apply-color-btn" id="apply-wheel-color">Appliquer</button>
         </div>
       </div>
-    </div>
-  `);
+    `);
   
-  // Initialiser la prévisualisation de la couleur des jantes
-  if (vehicleData.wheelColor !== undefined) {
-    initWheelColorPreview(vehicleData.wheelColor);
+    // Génération dynamique des couleurs des jantes
+    const wheelColorsGrid = $('.wheel-colors-grid');
+    wheelColorsGrid.empty();
+    
+    // Style CSS pour la grille des couleurs
+    wheelColorsGrid.css({
+      'display': 'grid',
+      'grid-template-columns': 'repeat(8, 1fr)',
+      'gap': '8px',
+      'margin': '10px 0 15px 0'
+    });
+    
+    // Générer les éléments de couleur
+    wheelColors.forEach(color => {
+      // Créer un élément pour chaque couleur
+      const colorItem = $(`
+        <div class="color-item wheel-color ${vehicleData.wheelColor === color.id ? 'active' : ''}"
+             data-color-id="${color.id}" 
+             title="${color.name}">
+        </div>
+      `);
+      
+      // Appliquer le style à l'élément couleur
+      colorItem.css({
+        'background-color': color.color,
+        'width': '100%',
+        'padding-bottom': '100%',
+        'position': 'relative',
+        'border-radius': '4px',
+        'cursor': 'pointer',
+        'border': '2px solid transparent',
+        'transition': 'all 0.2s ease'
+      });
+      
+      if (vehicleData.wheelColor === color.id) {
+        colorItem.css({
+          'border-color': '#ffffff',
+          'box-shadow': '0 0 5px rgba(255, 255, 255, 0.7)'
+        });
+      }
+      
+      // Animation hover
+      colorItem.hover(
+        function() {
+          $(this).css({
+            'transform': 'scale(1.1)',
+            'z-index': '10',
+            'box-shadow': '0 0 8px rgba(255, 255, 255, 0.5)'
+          });
+        },
+        function() {
+          $(this).css({
+            'transform': 'scale(1)',
+            'z-index': '1',
+            'box-shadow': vehicleData.wheelColor === color.id ? '0 0 5px rgba(255, 255, 255, 0.7)' : 'none'
+          });
+        }
+      );
+      
+      // Ajouter un gestionnaire d'événement pour la sélection
+      colorItem.on('click', function() {
+        // Réinitialiser tous les éléments
+        $('.wheel-color').removeClass('active').css({
+          'border-color': 'transparent',
+          'box-shadow': 'none'
+        });
+        
+        // Activer l'élément sélectionné
+        $(this).addClass('active').css({
+          'border-color': '#ffffff',
+          'box-shadow': '0 0 5px rgba(255, 255, 255, 0.7)'
+        });
+        
+        const colorId = parseInt($(this).data('color-id'));
+        
+        // Mettre à jour vehicleData pour maintenir l'état
+        vehicleData.wheelColor = colorId;
+        
+        // Envoyer l'ID exact de la couleur GTA
+        applyModification("wheelColor", colorId);
+        
+        // Notification
+        showNotification(`Couleur de jantes: ${color.name}`);
+      });
+      
+      wheelColorsGrid.append(colorItem);
+    });
+    
+    // Fumée des pneus
+    $('#wheels-container').append(`
+      <div class="color-section">
+        <div class="color-section-header">
+          <div class="color-title">Fumée des pneus</div>
+          <div class="color-expand-btn"><i class="fas fa-chevron-up"></i></div>
+        </div>
+        
+        <div class="color-content">
+          <div class="extra-toggle">
+            <div class="extra-toggle-btn ${vehicleData.smokeEnabled ? 'active' : ''}" id="smoke-toggle"></div>
+            <div class="extra-toggle-label">Activer la fumée</div>
+          </div>
+          
+          <div class="smoke-colors-grid">
+            <!-- Les couleurs de fumée seront générées ici -->
+          </div>
+        </div>
+      </div>
+    `);
+    
+    // Génération dynamique des couleurs de fumée
+    const smokeColorsGrid = $('.smoke-colors-grid');
+    smokeColorsGrid.empty();
+    
+    // Style CSS pour la grille des couleurs de fumée
+    smokeColorsGrid.css({
+      'display': 'grid',
+      'grid-template-columns': 'repeat(4, 1fr)',
+      'gap': '8px',
+      'margin': '10px 0 15px 0'
+    });
+    
+    tyreSmokes.forEach(smoke => {
+      // Créer un élément pour chaque couleur de fumée
+      const smokeItem = $(`
+        <div class="color-item smoke-color" 
+             data-color-id="${smoke.id}" 
+             data-rgb="${smoke.rgb.join(',')}" 
+             style="background-color: ${smoke.color}" 
+             title="${smoke.name}">
+          <span>${smoke.name}</span>
+        </div>
+      `);
+      
+      // Style CSS pour l'élément de fumée
+      smokeItem.css({
+        'position': 'relative',
+        'height': '50px',
+        'display': 'flex',
+        'align-items': 'flex-end',
+        'justify-content': 'center',
+        'border': '2px solid transparent',
+        'border-radius': '4px',
+        'overflow': 'hidden',
+        'transition': 'all 0.2s ease',
+        'padding-bottom': '5px'
+      });
+      
+      // Style pour le texte
+      smokeItem.find('span').css({
+        'position': 'relative',
+        'z-index': '2',
+        'text-shadow': '0 0 3px rgba(0, 0, 0, 0.9)',
+        'font-weight': 'bold',
+        'font-size': '11px',
+        'color': 'rgba(255, 255, 255, 0.9)',
+        'background-color': 'rgba(0, 0, 0, 0.5)',
+        'padding': '2px 5px',
+        'border-radius': '3px'
+      });
+      
+      // Animation hover
+      smokeItem.hover(
+        function() {
+          $(this).css({
+            'transform': 'translateY(-2px)',
+            'box-shadow': `0 0 10px ${smoke.color}`,
+            'border-color': 'rgba(255, 255, 255, 0.5)'
+          });
+        },
+        function() {
+          $(this).css({
+            'transform': 'translateY(0)',
+            'box-shadow': 'none',
+            'border-color': 'transparent'
+          });
+        }
+      );
+      
+      // Ajouter un gestionnaire d'événement pour la sélection
+      smokeItem.on('click', function() {
+        $('.smoke-color').removeClass('active selected').css({
+          'border-color': 'transparent',
+          'box-shadow': 'none'
+        });
+        
+        $(this).addClass('active selected').css({
+          'border-color': '#ffffff',
+          'box-shadow': `0 0 10px ${smoke.color}`
+        });
+        
+        const colorId = parseInt($(this).data('color-id'));
+        const rgb = $(this).data('rgb').split(',').map(Number);
+        
+        // Envoyer l'ID et le RGB exact pour assurer que le jeu utilise la bonne couleur
+        applyModification("smokeColor", colorId, { rgb: rgb });
+        
+        // Activer la fumée si pas déjà active
+        if (!$("#smoke-toggle").hasClass("active")) {
+          $("#smoke-toggle").addClass("active");
+          applyModification("smoke", 1);
+        }
+        
+        // Notification
+        showNotification(`Couleur de fumée: ${smoke.name}`);
+      });
+      
+      smokeColorsGrid.append(smokeItem);
+    });
+    
+    // Configurer les boutons d'expansion
+    setupColorExpandButtons();
+    
+    // Gestionnaire pour le toggle de fumée
+    $('#smoke-toggle').on("click", function() {
+      const isActive = $(this).hasClass('active');
+      if (isActive) {
+        $(this).removeClass('active');
+        applyModification('smoke', 0);
+        showNotification("Fumée des pneus désactivée");
+      } else {
+        $(this).addClass('active');
+        applyModification("smoke", 1);
+        showNotification("Fumée des pneus activée");
+      }
+    });
+    
+    // Initialiser les sl
+    
+    // Initialiser les sliders glissables
+    makeSlidersDraggable();
   }
   
-  // Fumée des pneus
-  $('#wheels-container').append(`
-    <div class="color-section">
-      <div class="color-section-header">
-        <div class="color-title">Fumée des pneus</div>
-        <div class="color-expand-btn"><i class="fas fa-chevron-up"></i></div>
-      </div>
-      
-      <div class="color-content">
-        <div class="extra-toggle">
-          <div class="extra-toggle-btn ${vehicleData.smokeEnabled ? 'active' : ''}" id="smoke-toggle"></div>
-          <div class="extra-toggle-label">Activer la fumée</div>
-        </div>
-        
-        <div class="color-tabs">
-          <div class="color-tab active" data-tab="simple" data-target="smoke">Couleurs prédéfinies</div>
-          <div class="color-tab" data-tab="custom" data-target="smoke">Couleur personnalisée</div>
-        </div>
-        
-        <div id="smoke-simple-content">
-          <div class="smoke-colors-grid">
-            ${tyreSmokes.map(smoke => `
-              <div class="color-item smoke-color" 
-                   data-color-id="${smoke.id}" 
-                   data-rgb="${smoke.rgb.join(',')}" 
-                   style="background-color: ${smoke.color}" 
-                   title="${smoke.name}">
-                <span>${smoke.name}</span>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-        
-        <div id="smoke-custom-content" style="display: none;">
-          <div class="smoke-preview" id="smoke-preview"></div>
-          
-          <div class="rgb-sliders">
-            <div class="rgb-slider">
-              <span>R</span>
-              <input type="range" min="0" max="255" value="128" id="smoke-r-slider">
-              <span id="smoke-r-value">128</span>
-            </div>
-            <div class="rgb-slider">
-              <span>G</span>
-              <input type="range" min="0" max="255" value="128" id="smoke-g-slider">
-              <span id="smoke-g-value">128</span>
-            </div>
-            <div class="rgb-slider">
-              <span>B</span>
-              <input type="range" min="0" max="255" value="128" id="smoke-b-slider">
-              <span id="smoke-b-value">128</span>
-            </div>
-          </div>
-          
-          <div class="color-picker-values">
-            <div class="color-input">
-              <span>HEX</span>
-              <input type="text" id="smoke-hex-value" value="#808080">
-            </div>
-          </div>
-          
-          <div class="gradient-slider">
-            <input type="range" min="0" max="360" value="0" id="smoke-hue-slider">
-          </div>
-          
-          <button class="apply-color-btn" id="apply-smoke-color">Appliquer</button>
-        </div>
-      </div>
-    </div>
-  `);
   
-  // Configurer les gestionnaires d'événements
-  
-  // Onglets de couleur
-  $(".color-tab").off('click').on("click", function() {
-    const tabType = $(this).data("tab");
-    const target = $(this).data("target");
-    const section = $(this).closest(".color-section");
-    
-    // Mettre à jour les onglets
-    section.find(".color-tab").removeClass("active");
-    $(this).addClass("active");
-    
-    // Afficher le contenu approprié
-    if (tabType === "simple") {
-      $(`#${target}-simple-content`).show();
-      $(`#${target}-custom-content`).hide();
-    } else {
-      $(`#${target}-simple-content`).hide();
-      $(`#${target}-custom-content`).show();
-    }
-  });
-  
-  // Configurer les boutons d'expansion
-  setupColorExpandButtons();
-  
-  // Couleur des jantes (prédéfinies)
-  $(".wheel-color").on("click", function() {
-    $(".wheel-color").removeClass("active selected");
-    $(this).addClass("active selected");
-    
-    const colorId = parseInt($(this).data("color"));
-    const rgb = $(this).data("rgb").split(',').map(Number);
-    
-    // Appliquer la couleur avec les RGB exacts
-    applyModification("wheelColor", colorId);
-    
-    // Mettre à jour la prévisualisation
-    initWheelColorPreview(colorId, rgb);
-    
-    // Notification
-    const colorName = $(this).attr("title") || "Couleur";
-    showNotification(`Couleur de jantes: ${colorName}`);
-  });
-  
-  // Couleur des fumées (prédéfinies)
-  $(".smoke-color").on("click", function() {
-    $(".smoke-color").removeClass("active selected");
-    $(this).addClass("active selected");
-    
-    const colorId = parseInt($(this).data("color-id"));
-    const rgb = $(this).data("rgb").split(',').map(Number);
-    
-    // Envoyer l'ID et le RGB exact pour assurer que le jeu utilise la bonne couleur
-    applyModification("smokeColor", colorId, { rgb: rgb });
-    
-    // Mettre à jour la prévisualisation
-    updateSmokePreview(rgb[0], rgb[1], rgb[2]);
-    
-    // Activer la fumée si pas déjà active
-    if (!$("#smoke-toggle").hasClass("active")) {
-      $("#smoke-toggle").addClass("active");
-      applyModification("smoke", 1);
-    }
-    
-    // Notification
-    const smokeName = $(this).find("span").text() || "Couleur";
-    showNotification(`Couleur de fumée: ${smokeName}`);
-  });
-  
-  // Configuration des sélecteurs de couleur personnalisée
-  setupWheelColorPicker();
-  setupSmokeColorPicker();
-  
-  // Gestionnaire pour le toggle de fumée
-  $('#smoke-toggle').on("click", function() {
-    const isActive = $(this).hasClass('active');
-    if (isActive) {
-      $(this).removeClass('active');
-      applyModification('smoke', 0);
-      showNotification("Fumée des pneus désactivée");
-    } else {
-      $(this).addClass('active');
-      applyModification("smoke", 1);
-      showNotification("Fumée des pneus activée");
-    }
-  });
-  
-  // Boutons d'application des couleurs personnalisées
-  $("#apply-wheel-color").on("click", function() {
-    const r = parseInt($("#wheel-r-slider").val());
-    const g = parseInt($("#wheel-g-slider").val());
-    const b = parseInt($("#wheel-b-slider").val());
-    
-    // Trouver la couleur de jante la plus proche
-    const closestColor = findClosestWheelColor(r, g, b);
-    
-    // Appliquer la couleur avec l'ID exact et le RGB exact
-    applyModification("wheelColor", closestColor.id, { rgb: closestColor.rgb });
-    
-    // Mettre à jour l'interface
-    $(".wheel-color").removeClass("active");
-    $(`.wheel-color[data-color="${closestColor.id}"]`).addClass("active");
-    
-    // Notification
-    showNotification(`Couleur de jantes: ${closestColor.name}`);
-  });
-  
-  $("#apply-smoke-color").on("click", function() {
-    const r = parseInt($("#smoke-r-slider").val());
-    const g = parseInt($("#smoke-g-slider").val());
-    const b = parseInt($("#smoke-b-slider").val());
-    
-    // Trouver la couleur de fumée la plus proche
-    const closestSmoke = findClosestSmokeColor(r, g, b);
-    
-    // Appliquer la couleur avec l'ID exact et le RGB exact
-    applyModification("smokeColor", closestSmoke.id, { rgb: closestSmoke.rgb });
-    
-    // Mettre à jour l'interface
-    $(".smoke-color").removeClass("active");
-    $(`.smoke-color[data-color-id="${closestSmoke.id}"]`).addClass("active");
-    
-    // Activer la fumée si pas déjà active
-    if (!$("#smoke-toggle").hasClass("active")) {
-      $("#smoke-toggle").addClass("active");
-      applyModification("smoke", 1);
-    }
-    
-    // Notification
-    showNotification(`Couleur de fumée personnalisée: ${closestSmoke.name}`);
-  });
-  
-  // Initialiser les sliders glissables
-  makeSlidersDraggable();
-}
 
 function setupSmokeColorPicker() {
   // Mise à jour à chaque changement de slider RGB
@@ -4285,6 +4445,7 @@ function addSmokeEffect(element, r, g, b) {
   }
 }
 
+
 function updateWheelPreview(r, g, b) {
   // Mettre à jour la prévisualisation
   $("#wheel-preview").css({
@@ -4315,7 +4476,6 @@ function updateWheelPreview(r, g, b) {
   $("#wheel-hue-slider").val(hsb[0]);
 }
 
-// Fonction améliorée pour mettre à jour la prévisualisation de la fumée des pneus
 function updateSmokePreview(r, g, b) {
   // Mettre à jour l'apparence de la prévisualisation
   $("#smoke-preview").css({
@@ -4325,51 +4485,6 @@ function updateSmokePreview(r, g, b) {
   
   // Ajouter un effet visuel de fumée
   addSmokeEffect($("#smoke-preview"), r, g, b);
-  
-  // Mettre à jour les sliders
-  $("#smoke-r-slider").val(r);
-  $("#smoke-g-slider").val(g);
-  $("#smoke-b-slider").val(b);
-  
-  // Mettre à jour les valeurs affichées
-  $("#smoke-r-value").text(r);
-  $("#smoke-g-value").text(g);
-  $("#smoke-b-value").text(b);
-  
-  // Mettre à jour la valeur hex
-  $("#smoke-hex-value").val(rgbToHex(r, g, b));
-  
-  // Mettre à jour le slider de teinte
-  const hsb = rgbToHsb(r, g, b);
-  $("#smoke-hue-slider").val(hsb[0]);
-}
-
-function updateSmokePreview(r, g, b) {
-  // Mettre à jour l'apparence de la prévisualisation
-  $("#smoke-preview").css({
-    "background-color": `rgb(${r},${g},${b})`,
-    "box-shadow": `0 0 15px rgba(${r},${g},${b},0.4)`
-  });
-  
-  // Ajouter un effet visuel de fumée
-  addSmokeEffect($("#smoke-preview"), r, g, b);
-  
-  // Mettre à jour les sliders
-  $("#smoke-r-slider").val(r);
-  $("#smoke-g-slider").val(g);
-  $("#smoke-b-slider").val(b);
-  
-  // Mettre à jour les valeurs affichées
-  $("#smoke-r-value").text(r);
-  $("#smoke-g-value").text(g);
-  $("#smoke-b-value").text(b);
-  
-  // Mettre à jour la valeur hex
-  $("#smoke-hex-value").val(rgbToHex(r, g, b));
-  
-  // Mettre à jour le slider de teinte
-  const hsb = rgbToHsb(r, g, b);
-  $("#smoke-hue-slider").val(hsb[0]);
 }
 
 // Configuration du sélecteur de couleur personnalisée pour les jantes
